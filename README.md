@@ -1,2 +1,2 @@
 # Pathfinder
-Traces a part from start to end using the A* algorithm
+Traces a path from start to end using the A* algorithm
