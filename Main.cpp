@@ -10,6 +10,7 @@ using namespace std;
 void PlaceNodeInput(NodeMap &map);
 void Pathfind(NodeMap &map);
 void TurnPathIntoWall(NodeMap &map);
+void TestMap(NodeMap &map);
 void ClearInput();
 
 int main() {
@@ -28,6 +29,7 @@ int main() {
 void PlaceNodeInput(NodeMap &map) {
 	size_t  coord1, coord2 = 0;
 	char nodeType = 1;
+	TestMap(map);
 	map.DisplayMap();
 	do {
 		if (nodeType == 1) {
@@ -72,7 +74,7 @@ void ClearInput() { // Clears buffer
 }
 
 void Pathfind(NodeMap &map) {
-	map.StartNode->ScanPath(map);
+	map.StartNode->StartScan(map);
 	map.DisplayMap();
 	
 	if (*map.found == true) {
@@ -94,8 +96,32 @@ void TurnPathIntoWall(NodeMap &map) {
 		node->SetNodeType(3);
 		node->ResetNode();
 	}
+	map.StartNode->SetIcon('X');
+	map.StartNode->SetNodeType(3);
+	map.StartNode->ParentNode = 0;
+	map.EndNode->SetIcon('X');
+	map.EndNode->SetNodeType(3);
+	map.EndNode->ParentNode = 0;
 	*map.found = false;
 	map.StartNode = 0;
 	map.EndNode = 0;
 	map.PathDrawn.clear();
+}
+
+void TestMap(NodeMap &map) {
+	map.NodeMapContainer.at(0).at(3)->SetNodeType(3);
+	map.NodeMapContainer.at(0).at(3)->SetIcon('X');
+	map.NodeMapContainer.at(1).at(3)->SetNodeType(3);
+	map.NodeMapContainer.at(1).at(3)->SetIcon('X');
+	map.NodeMapContainer.at(2).at(3)->SetNodeType(3);
+	map.NodeMapContainer.at(2).at(3)->SetIcon('X');
+	map.NodeMapContainer.at(3).at(3)->SetNodeType(3);
+	map.NodeMapContainer.at(3).at(3)->SetIcon('X');
+	map.NodeMapContainer.at(4).at(3)->SetNodeType(3);
+
+	map.NodeMapContainer.at(4).at(3)->SetIcon('X');
+	map.NodeMapContainer.at(4).at(2)->SetNodeType(3);
+	map.NodeMapContainer.at(4).at(2)->SetIcon('X');
+	map.NodeMapContainer.at(4).at(1)->SetNodeType(3);
+	map.NodeMapContainer.at(4).at(1)->SetIcon('X');
 }
